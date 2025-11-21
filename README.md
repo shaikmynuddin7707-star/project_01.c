@@ -1,182 +1,143 @@
-/* grades.c
-   Simple Exam / Grades Management Program in C (C99)
-   Features:
-   - Input number of students and subjects
-   - Input student ID, name and marks per subject
-   - Compute total, percentage, letter grade
-   - Print report and class statistics (average, highest, lowest)
-*/
+Abstract                                                                                                                                                                        The Grades Management Program is a C-based application designed to efficiently handle student examination records. It allows the user to input the number of students and subjects, and then collects each student's ID, name, and marks dynamically using memory allocation. The program calculates total marks, percentage, and assigns a letter grade based on a predefined grading scale. It generates a structured report showing individual student performance and also computes class-level analytics such as average marks, highest score, and lowest score. Dynamic memory management ensures flexibility for varying numbers of students and subjects. Overall, the program provides a simple yet effective system for managing and evaluating academic results.  
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#define NAME_LEN 100
 
-typedef struct {
-    int id;
-    char name[NAME_LEN];
-    int *marks;     // dynamic array of marks per subject
-    int total;
-    double percent;
-    char grade;     // letter grade
-} Student;
+Functional Requirements
 
-/* function prototypes */
-Student *create_students(int n, int subjects);
-void input_data(Student *students, int n, int subjects);
-void compute_results(Student *students, int n, int subjects, int max_mark_per_subject);
-char calculate_grade(double percent);
-void print_report(Student *students, int n, int subjects);
-void print_statistics(Student *students, int n);
-void free_students(Student *students, int n);
+Below are precise, testable functional requirements derived from your grades.c program. Each item states what the system must do, with input, output, validation, and any important constraints.
 
-int main(void) {
-    int n, subjects;
-    int max_mark_per_subject = 100; // assumed max marks per subject
+1. Start-up / Welcome
 
-    printf("Exam / Grades Management System\n");
-    printf("--------------------------------\n");
-    printf("Enter number of students: ");
-    if (scanf("%d", &n) != 1 || n <= 0) {
-        printf("Invalid student count.\n");
-        return 1;
-    }
+R1.1: On launch, display a title banner: "Exam / Grades Management System" and a short separator line.
 
-    printf("Enter number of subjects: ");
-    if (scanf("%d", &subjects) != 1 || subjects <= 0) {
-        printf("Invalid subject count.\n");
-        return 1;
-    }
+Acceptance: Banner printed to stdout before any prompts.
 
-    Student *students = create_students(n, subjects);
-    if (!students) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
+2. Student & Subject Count Input
 
-    /* consume newline before fgets */
-    getchar();
+R2.1: Prompt the user to enter the number of students (n).
 
-    input_data(students, n, subjects);
-    compute_results(students, n, subjects, max_mark_per_subject);
-    print_report(students, n, subjects);
-    print_statistics(students, n);
+Input: integer
 
-    free_students(students, n);
-    return 0;
-}
+Validation: must be an integer > 0
 
-/* allocate array of students and allocate marks arrays for each student */
-Student *create_students(int n, int subjects) {
-    Student *arr = malloc(sizeof(Student) * n);
-    if (!arr) return NULL;
-    for (int i = 0; i < n; ++i) {
-        arr[i].marks = malloc(sizeof(int) * subjects);
-        if (!arr[i].marks) {
-            /* free already allocated */
-            for (int j = 0; j < i; ++j) free(arr[j].marks);
-            free(arr);
-            return NULL;
-        }
-        arr[i].total = 0;
-        arr[i].percent = 0.0;
-        arr[i].grade = 'F';
-    }
-    return arr;
-}
+Error Handling: If invalid, print "Invalid student count." and exit with non-zero status.
 
-/* read student details */
-void input_data(Student *students, int n, int subjects) {
-    for (int i = 0; i < n; ++i) {
-        printf("\n--- Student %d ---\n", i + 1);
-        printf("Enter student ID (integer): ");
-        while (scanf("%d", &students[i].id) != 1) {
-            printf("Invalid input. Enter integer ID: ");
-            while (getchar() != '\n'); // flush
-        }
-        while (getchar() != '\n'); // consume trailing newline
+R2.2: Prompt the user to enter the number of subjects (subjects).
 
-        printf("Enter student name: ");
-        if (!fgets(students[i].name, NAME_LEN, stdin)) {
-            students[i].name[0] = '\0';
-        } else {
-            /* strip newline */
-            size_t len = strlen(students[i].name);
-            if (len && students[i].name[len - 1] == '\n') students[i].name[len - 1] = '\0';
-        }
+Input: integer
 
-        for (int s = 0; s < subjects; ++s) {
-            int m;
-            printf("Enter marks for subject %d (0 - 100): ", s + 1);
-            while (scanf("%d", &m) != 1 || m < 0 || m > 100) {
-                printf("Invalid marks. Enter 0 - 100: ");
-                while (getchar() != '\n'); // flush
-            }
-            students[i].marks[s] = m;
-        }
-        while (getchar() != '\n'); // clear remainder before next fgets
-    }
-}
+Validation: must be an integer > 0
 
-/* compute totals, percentages and letter grades */
-void compute_results(Student *students, int n, int subjects, int max_mark_per_subject) {
-    int full_marks = subjects * max_mark_per_subject;
-    for (int i = 0; i < n; ++i) {
-        int sum = 0;
-        for (int s = 0; s < subjects; ++s) {
-            sum += students[i].marks[s];
-        }
-        students[i].total = sum;
-        students[i].percent = (double)sum * 100.0 / full_marks;
-        students[i].grade = calculate_grade(students[i].percent);
-    }
-}
+Error Handling: If invalid, print "Invalid subject count." and exit with non-zero status.
 
-/* simple grade scale */
-char calculate_grade(double percent) {
-    if (percent >= 90.0) return 'A';
-    if (percent >= 80.0) return 'B';
-    if (percent >= 70.0) return 'C';
-    if (percent >= 60.0) return 'D';
-    return 'F';
-}
+3. Memory Allocation for Students
 
-/* print neat table with student results */
-void print_report(Student *students, int n, int subjects) {
-    printf("\n\n=== Students Report ===\n");
-    printf("%-6s %-20s %-8s %-10s %-6s\n", "ID", "Name", "Total", "Percent(%)", "Grade");
-    printf("-----------------------------------------------------------------\n");
-    for (int i = 0; i < n; ++i) {
-        printf("%-6d %-20s %-8d %-10.2f %-6c\n",
-               students[i].id,
-               students[i].name,
-               students[i].total,
-               students[i].percent,
-               students[i].grade);
-    }
-}
+R3.1: Allocate a contiguous array of n Student structures.
 
-/* class-level statistics */
-void print_statistics(Student *students, int n) {
-    if (n == 0) return;
-    int highest = students[0].total;
-    int lowest = students[0].total;
-    double sum = 0.0;
-    for (int i = 0; i < n; ++i) {
-        if (students[i].total > highest) highest = students[i].total;
-        if (students[i].total < lowest) lowest = students[i].total;
-        sum += students[i].total;
-    }
-    double avg = sum / n;
-    printf("\n=== Class Statistics ===\n");
-    printf("Average total marks : %.2f\n", avg);
-    printf("Highest total marks : %d\n", highest);
-    printf("Lowest total marks  : %d\n", lowest);
-}
+R3.2: For each student, allocate a dynamic integer array of length subjects for marks.
 
-/* free dynamic memory */
-void free_students(Student *students, int n) {
-    for (int i = 0; i < n; ++i) free(students[i].marks);
-    free(students);
-}
+Error Handling: If any allocation fails, print "Memory allocation failed." and terminate with error.
+
+4. Student Data Entry
+
+R4.1: For each student i (1..n), prompt:
+
+Student ID (integer)
+
+Validation: must be integer
+
+Behavior: re-prompt until valid integer entered
+
+Student name (string)
+
+Behavior: read full line (up to NAME_LEN) and strip trailing newline
+
+Marks for each subject s (integer 0–100)
+
+Validation: must be integer within [0,100]
+
+Behavior: re-prompt until valid
+
+R4.2: Consume/clear trailing newline characters appropriately between inputs so subsequent fgets/scanf works correctly.
+
+5. Result Computation
+
+R5.1: Compute each student's total marks as the sum of their subject marks.
+
+R5.2: Compute percentage as (total / (subjects * max_mark_per_subject)) * 100.0, where max_mark_per_subject is 100 by default.
+
+R5.3: Assign a letter grade using the grading scale:
+
+>= 90.0 → A
+
+>= 80.0 → B
+
+>= 70.0 → C
+
+>= 60.0 → D
+
+< 60.0 → F
+
+6. Report Generation
+
+R6.1: Print a formatted table header: ID, Name, Total, Percent(%), Grade.
+
+R6.2: For each student print a row with ID, name, total, percent (two decimal places), and grade aligned to columns.
+
+7. Class Statistics
+
+R7.1: Compute and display:
+
+Average total marks (two decimal places)
+
+Highest total marks
+
+Lowest total marks
+
+Precondition: n > 0; if n == 0, skip statistics.
+
+8. Memory Deallocation
+
+R8.1: Free each student's marks array and then free the students array before program exit to avoid memory leaks.
+
+9. Input Robustness & Flow
+
+R9.1: Where scanf is used, flush invalid input from stdin and re-prompt.
+
+R9.2: Use fgets for names to allow spaces; strip newline.
+
+10. Configurable Parameters (implicit)
+
+R10.1: The maximum marks per subject is assumed to be 100 but should be used in percentage calculation (currently hard-coded as max_mark_per_subject = 100).
+
+11. Error & Exit Codes
+
+R11.1: The program must return a non-zero exit code for fatal errors (invalid counts, memory allocation failure).
+
+R11.2: On normal completion, the program exits with 0.
+
+12. Usability
+
+R12.1: Prompts and output must be human-readable and follow the order shown in the code (prompt → input → compute → report → statistics).
+
+Mapping to Code Components (for traceability)
+
+Input & validation: main() prompts + scanf checks, input_data()
+
+Allocation / deallocation: create_students(), free_students()
+
+Computation: compute_results(), calculate_grade()
+
+Output: print_report(), print_statistics()
+
+Example Acceptance Test (quick)
+
+Start program.
+
+Enter 2 students, 3 subjects.
+
+Student1: ID 101, Name Alice, marks 80 90 100.
+
+Student2: ID 102, Name Bob, marks 50 60 70.
+
+Program prints table with correct totals (270, 180), percentages, grades (A and F/D depending on scale), and class stats (avg, highest, lowest).
