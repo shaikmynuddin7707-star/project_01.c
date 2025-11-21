@@ -321,4 +321,7 @@ Lowest marks
 8. Program Exit
 
 Once the results and statistics are printed, the program exits safely after freeing memory.                                              screenshot                                                                                                             <img width="442" height="208" alt="Screenshot 2025-11-21 155248" src="https://github.com/user-attachments/assets/6ffb4c17-700f-4d86-a4b8-0509ba46b4ca" />
+<img width="480" height="183" alt="Screenshot 2025-11-21 160236" src="https://github.com/user-attachments/assets/40be8940-1be1-4275-bbbc-b702007e3da0" />
+
+
 
