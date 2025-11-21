@@ -140,4 +140,184 @@ Student1: ID 101, Name Alice, marks 80 90 100.
 
 Student2: ID 102, Name Bob, marks 50 60 70.
 
-Program prints table with correct totals (270, 180), percentages, grades (A and F/D depending on scale), and class stats (avg, highest, lowest).
+Program prints table with correct totals (270, 180), percentages, grades (A and F/D depending on scale), and class stats (avg, highest, lowest).                                 Features of the Grades Management Program
+1. Dynamic Student & Subject Handling
+
+Allows the user to enter any number of students and subjects.
+
+Uses dynamic memory allocation (malloc) to store marks for flexible data handling.
+
+2. Student Information Input
+
+Accepts student ID, name, and marks for each subject.
+
+Supports names with spaces using fgets.
+
+Validates all inputs (e.g., marks must be between 0 and 100).
+
+3. Automatic Result Calculation
+
+Computes total marks for each student.
+
+Calculates percentage based on total and maximum possible marks.
+
+Assigns a letter grade (A, B, C, D, F) using a fixed grading scale.
+
+4. Tabular Results Report
+
+Displays a neatly formatted table containing:
+
+Student ID
+
+Name
+
+Total marks
+
+Percentage
+
+Grade
+
+Ensures clean alignment using formatted print statements.
+
+5. Class Statistics
+
+Calculates and displays:
+
+Average class score
+
+Highest total score
+
+Lowest total score
+
+6. Input Validation & Error Handling
+
+Validates numeric inputs for ID and marks.
+
+Re-prompts until valid data is entered.
+
+Handles memory allocation failures gracefully.
+
+7. Memory Safety
+
+Frees all dynamically allocated memory at the end of the program.
+
+Prevents memory leaks by freeing marks for each student and the student array.
+
+8. Modular Program Design
+
+Organized into functions such as:
+
+create_students()
+
+input_data()
+
+compute_results()
+
+print_report()
+
+print_statistics()
+
+free_students()
+
+Improves readability, maintainability, and reusability.
+
+9. User-Friendly Console Interface
+
+Clear prompts and separation between student entries.
+
+Headings and separators for reports.
+
+Easy-to-understand flow suitable for beginners.                                                                                                                                How to Run the Project
+
+Follow the steps below to compile and execute the Grades Management Program written in C.
+
+1. Install a C Compiler
+
+Make sure you have a C compiler installed on your system, such as:
+
+GCC (Linux, macOS, Windows with MinGW)
+
+Clang
+
+Turbo C/C++ (for academic use, not recommended)
+
+CodeBlocks, Dev-C++, or any IDE that supports C (optional)
+
+2. Save the Program File
+
+Open any text editor or IDE.
+
+Copy the entire C program into a file named:
+
+grades.c
+
+3. Open Terminal / Command Prompt
+
+Depending on the OS:
+
+Windows (MinGW / Git Bash / CMD)
+
+Linux (Ubuntu, Fedora, etc.)
+
+macOS Terminal
+
+Navigate to the folder where grades.c is saved:
+
+cd path_to_your_folder
+
+4. Compile the Program
+
+Use GCC to compile:
+
+gcc grades.c -o grades
+
+
+If no errors occur, an executable file will be generated.
+
+5. Run the Program
+
+Execute the compiled program:
+
+Windows:
+grades.exe
+
+Linux / macOS:
+./grades
+
+6. Enter Required Inputs
+
+The program will prompt you to enter:
+
+Number of students
+
+Number of subjects
+
+Each student's:
+
+ID
+
+Name
+
+Marks for all subjects
+
+Follow the on-screen instructions.
+
+7. View the Output
+
+After entering all data, the program will display:
+
+A full students report table
+
+Individual percentage and grade
+
+Class statistics:
+
+Average marks
+
+Highest marks
+
+Lowest marks
+
+8. Program Exit
+
+Once the results and statistics are printed, the program exits safely after freeing memory.
