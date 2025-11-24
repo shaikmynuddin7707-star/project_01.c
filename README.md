@@ -337,23 +337,11 @@ Once the results and statistics are printed, the program exits safely after free
 # screenshot  
 
 
-<img width="380" height="120" alt="Screenshot 2025-11-24 191920" src="https://github.com/user-attachments/assets/87b5ed34-e80e-40b0-a3e0-b20ad19ed455" />
-
-
-
+> <img width="380" height="120" alt="Screenshot 2025-11-24 191920" src="https://github.com/user-attachments/assets/87b5ed34-e80e-40b0-a3e0-b20ad19ed455" />
 
 <img width="493" height="249" alt="Screenshot 2025-11-24 191948" src="https://github.com/user-attachments/assets/4326caf4-add3-4259-9c7d-ae178446fb8f" />
 
-
-
-
-
 <img width="891" height="248" alt="Screenshot 2025-11-24 192021" src="https://github.com/user-attachments/assets/0e5d0ae9-5c86-4fef-9837-26ab8e5b9ae1" />
-
-
-
-
-
 
 <img width="441" height="126" alt="Screenshot 2025-11-24 192037" src="https://github.com/user-attachments/assets/06a0307d-f827-4f66-a213-3cebda906fa0" />
 
