@@ -333,3 +333,7 @@ Lowest marks
 #### 8. Program Exit
 
 Once the results and statistics are printed, the program exits safely after freeing memory.
+
+# screenshot  
+
+
