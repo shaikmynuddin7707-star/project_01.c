@@ -1,8 +1,16 @@
-Abstract                                                                                                                                                                        The Grades Management Program is a C-based application designed to efficiently handle student examination records. It allows the user to input the number of students and subjects, and then collects each student's ID, name, and marks dynamically using memory allocation. The program calculates total marks, percentage, and assigns a letter grade based on a predefined grading scale. It generates a structured report showing individual student performance and also computes class-level analytics such as average marks, highest score, and lowest score. Dynamic memory management ensures flexibility for varying numbers of students and subjects. Overall, the program provides a simple yet effective system for managing and evaluating academic results.  
+# Exam/Grades Management
 
 
 
-Functional Requirements
+A brief description of what this project does and who it's for
+
+
+## Abstract 
+
+The Grades Management Program is a C-based application designed to efficiently handle student examination records. It allows the user to input the number of students and subjects, and then collects each student's ID, name, and marks dynamically using memory allocation. The program calculates total marks, percentage, and assigns a letter grade based on a predefined grading scale. It generates a structured report showing individual student performance and also computes class-level analytics such as average marks, highest score, and lowest score. Dynamic memory management ensures flexibility for varying numbers of students and subjects. Overall, the program provides a simple yet effective system for managing and evaluating academic results.
+## Functional requirements
+
+
 
 Below are precise, testable functional requirements derived from your grades.c program. Each item states what the system must do, with input, output, validation, and any important constraints.
 
@@ -140,7 +148,10 @@ Student1: ID 101, Name Alice, marks 80 90 100.
 
 Student2: ID 102, Name Bob, marks 50 60 70.
 
-Program prints table with correct totals (270, 180), percentages, grades (A and F/D depending on scale), and class stats (avg, highest, lowest).                                 Features of the Grades Management Program
+Program prints table with correct totals (270, 180), percentages, grades (A and F/D depending on scale), and class stats (avg, highest, lowest).
+## Features of the Grades Management Program
+
+
 1. Dynamic Student & Subject Handling
 
 Allows the user to enter any number of students and subjects.
@@ -227,9 +238,8 @@ Clear prompts and separation between student entries.
 
 Headings and separators for reports.
 
-Easy-to-understand flow suitable for beginners.                                                                                                                                How to Run the Project
-
-Follow the steps below to compile and execute the Grades Management Program written in C.
+Easy-to-understand flow suitable for beginners.
+## How to Run the Project
 
 1. Install a C Compiler
 
@@ -320,8 +330,4 @@ Lowest marks
 
 8. Program Exit
 
-Once the results and statistics are printed, the program exits safely after freeing memory.                                              screenshot                                                                                                             <img width="442" height="208" alt="Screenshot 2025-11-21 155248" src="https://github.com/user-attachments/assets/6ffb4c17-700f-4d86-a4b8-0509ba46b4ca" />
-<img width="480" height="183" alt="Screenshot 2025-11-21 160236" src="https://github.com/user-attachments/assets/40be8940-1be1-4275-bbbc-b702007e3da0" />
-
-
-
+Once the results and statistics are printed, the program exits safely after freeing memory.
